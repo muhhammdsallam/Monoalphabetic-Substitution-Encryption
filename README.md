@@ -1,4 +1,4 @@
-# Monoalphabetic-Encryption-Decryption
+# Monoalphabetic Encryption and Decryption
 This program was done as a final project for microprocessors course 
 # Description 
 This program is used to encrypt monoalphabetics using this table.
