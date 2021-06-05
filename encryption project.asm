@@ -11,6 +11,7 @@ org 100h
         MSG1  DB 13,10, ' enter your string :  $'
         MSG2 DB 13,10, ' your encrypted string is :  $'
         MSG3 DB 13,10, ' your decrypted string is :  $'
+        MSG4 DB 13,10, ' to close the program press any key :  $'
         STR1 DB  255 DUP('$') 
         
         ;                       'abcdefghijklmnopqrstvuwxyz'
@@ -44,7 +45,7 @@ READS:
     INT 21H
     MOV [SI],AL
     INC SI
-    CMP AL,13;;;;;;;;;;;cariage return = 0dh
+    CMP AL,13
     JNE READS
 
    
@@ -53,8 +54,12 @@ READS:
                
 ENCRYPTS:
     LEA BX, TABLE1
+    LEA SI, STR1 
+    CALL TRANSLATE  ;encrypt the string
     LEA SI, STR1
-    CALL TRANSLATE   
+    CALL REMOVES    ;remove spaces from string
+    
+      
     
     LEA DX,MSG2     ;output message2
     MOV AH,09H
@@ -71,7 +76,11 @@ ENCRYPTS:
 DECRYPTS:
     LEA BX, TABLE2
     LEA SI, STR1
-    CALL TRANSLATE 
+    CALL TRANSLATE    ;decrypt the string
+    LEA SI, STR1
+    CALL REMOVES      ;remove spaces from string
+
+
       
     LEA DX,MSG3     ;output message3
     MOV AH,09H
@@ -79,15 +88,63 @@ DECRYPTS:
        
     LEA DX, STR1
     MOV AH, 09H
-    INT 21H
-
+    INT 21H 
+    
+    
+    
 ; wait for any key to exit program
     MOV AH, 0
-    INT 16H 
+    INT 16H  
+          
+    RET
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      
-     
-     
-;-------------------------------------------------------------------     
+;-------------------------------------------------------------------  
+;PROCEDURES---------------------------------------------------------
+    
+         
+REMOVES PROC NEAR 
+        
+        MOV DI,SI
+        
+    NEXT_CHA:
+        CMP [DI],'$'
+        JE ENDSTRING  
+        
+        MOV AL,[DI]
+        CMP AL,' '
+        JE SKIPS
+        MOV [SI],AL
+        INC SI
+        INC DI  
+        JMP NEXT_CHA
+        
+    SKIPS:
+        INC DI
+        JMP NEXT_CHA
+           
+    ENDSTRING:
+
+  
+    RET
+REMOVES ENDP
+
+
      
      
 TRANSLATE PROC NEAR
@@ -105,12 +162,14 @@ TRANSLATE PROC NEAR
     	XLATB     ; encrypt using table.  
     	MOV [SI], AL   
     	
-    	
     SKIP:
     	INC SI	
     	JMP NEXT_CHAR
     	
     END_OF_STRING:
+ 
+        
+         
     RET            
     
 TRANSLATE ENDP
