@@ -1,7 +1,8 @@
 # Monoalphabetic Encryption and Decryption
 This program was done as a final project for microprocessors course 
 # Description 
-This program is used to encrypt monoalphabetics using this table.
+In the monoalphabetic substitution encryption, each alphabetic letter is substituted by another
+letter according to the following table:
 ![Untitled2](https://user-images.githubusercontent.com/81472165/120890015-7cbd1c00-c600-11eb-8d7e-f301c0592e23.png)
 - It takes a string input from user and encrypt it using a specific table stored in data segment.
 - It decrypts the same encrypted string using another table stored in data segment.
