@@ -8,5 +8,6 @@ letter according to the following table:
 - It decrypts the same encrypted string using another table stored in data segment.
 - Shows both results as an output to the user
 # Sample Run
-![Untitled](https://user-images.githubusercontent.com/81472165/120889792-1a175080-c5ff-11eb-96d4-581fc36fb5f5.png)
+![Untitled](https://user-images.githubusercontent.com/81472165/120942567-28ae5680-c72a-11eb-8764-4234f1327ada.png)
+
 
