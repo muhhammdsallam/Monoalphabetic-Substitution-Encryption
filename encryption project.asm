@@ -12,7 +12,7 @@ org 100h
         MSG2 DB 13,10, ' encrypted string >>>  $'
         MSG3 DB 13,10, ' decrypted string >>>  $'
         MSG4 DB 13,10, ' To end press any key / To continue press enter >>>  $'
-        STR1 DB  255 DUP('$') 
+        STR1 DB 255 DUP('$') 
          ;                      'abcdefghijklmnopqrstvuwxyz'
         
         TABLE1 DB 97 dup (' '), 'qwertyuiopasdfghjklzxcvbnm'
@@ -26,7 +26,7 @@ org 100h
 
 BEGIN:
 
-    MOV DX,0H
+
     MOV AX,@DATA
     MOV DS,AX    
     
@@ -34,11 +34,13 @@ BEGIN:
     MOV AH,09H
     INT 21H   
     
-    LEA SI,STR1
-    MOV AH,01H     
+         
             
 ;-------------------------------------------------------------------            
             
+    
+    LEA SI,STR1
+    MOV AH,01H
             
 READS:
     
@@ -52,6 +54,7 @@ READS:
 ;-------------------------------------------------------------------  
 
 REMOVE_SPACES:
+
     LEA SI, STR1
     CALL REMOVES    ;remove spaces from the string
            
@@ -107,7 +110,8 @@ DECRYPTS:
     JE BEGIN
     
 ENDPROGRAM:
-
+            
+    ;MOV AH,0H        
     INT 16H
     RET
 
