@@ -8,11 +8,14 @@ org 100h
 .DATA
 
 
-  MSG1 DB 13,10, ' - enter your string >>>  $'
-  MSG2 DB 13,10, ' - encrypted string  >>>  $'
-  MSG3 DB 13,10, ' - decrypted string  >>>  $'
+  MSG1 DB 13,10, ' - Enter The Message  >>>  $'
+  MSG2 DB 13,10, ' - Encrypted Message  >>>  $'
+  MSG3 DB 13,10, ' - Decrypted Message  >>>  $'
   MSG4 DB 13,10, ' - To end press any key / To continue press enter >>>  $'
-  STR1 DB 255 DUP('$')
+  MSG5 DB 13,10, '  $'
+  STR1 DB 255 DUP('$') 
+  STR2 DB 255 DUP('$')
+  
    ;                      'abcdefghijklmnopqrstvuwxyz'
         
   TABLE1 DB 97 dup (' '), 'qwertyuiopasdfghjklzxcvbnm'
@@ -28,9 +31,14 @@ BEGIN:
                                                                    
     LEA SI,STR1
     CALL CLEARSTRING    ;clear the string when restarting the program
+    
                                                                    
     MOV AX,@DATA        ;moves the data to data segment            
     MOV DS,AX                                                     
+    
+    LEA DX,MSG5         ;displays empty line
+    MOV AH,09H
+    INT 21H
                                                                    
     LEA DX,MSG1         ;displays message 1                                                 
     MOV AH,09H                                                     
@@ -93,7 +101,11 @@ DECRYPTS:;----------------------------------------------------------
     INT 21H                                                        
                                                                    
                                                                    
-;-------------------------------------------------------------------                                                                    
+;-------------------------------------------------------------------
+    LEA DX,MSG5      ;displays empty line
+    MOV AH,09H
+    INT 21H
+                                                                    
     LEA DX,MSG4      ;displays message 4                                                    
     MOV AH, 09H                                                    
     INT 21H                                                        
