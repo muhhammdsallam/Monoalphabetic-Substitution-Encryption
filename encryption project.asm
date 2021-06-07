@@ -8,10 +8,10 @@ org 100h
 .DATA
 
 
-  MSG1 DB 13,10, ' enter your string >>>  $'
-  MSG2 DB 13,10, ' encrypted string  >>>  $'
-  MSG3 DB 13,10, ' decrypted string  >>>  $'
-  MSG4 DB 13,10, ' To end press any key / To continue press enter >>>  $'
+  MSG1 DB 13,10, ' - enter your string >>>  $'
+  MSG2 DB 13,10, ' - encrypted string  >>>  $'
+  MSG3 DB 13,10, ' - decrypted string  >>>  $'
+  MSG4 DB 13,10, ' - To end press any key / To continue press enter >>>  $'
   STR1 DB 255 DUP('$')
    ;                      'abcdefghijklmnopqrstvuwxyz'
         
@@ -179,17 +179,24 @@ TRANSLATE PROC NEAR
     
 TRANSLATE ENDP 
 
+;------------------------------------------------------------------
 
 CLEARSTRING PROC NEAR
+    
  NEXTCHAR:
+ 
     CMP [SI],'$'
     JE ENDOFSTRING
+    
     MOV AL,'$'
     MOV [SI],AL
     INC SI
     JMP NEXTCHAR
+    
  ENDOFSTRING:
+ 
     RET
+    
 CLEARSTRING ENDP    
 
  
