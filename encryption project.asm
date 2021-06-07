@@ -123,8 +123,9 @@ ENDPROGRAM:
          
 REMOVES PROC NEAR 
         
-        MOV DI,SI
-        
+        MOV DI,SI                ;copies content of SI to DI and loop on DI to check for space characters if it finds a space         
+                                 ;it will increment DI(goes to next character)and repeat,if it finds a character it will store it in SI                         
+                                 
     NEXT_CHA:
         CMP [DI],'$'
         JE REMOVE-EXTRA-CHAR  
@@ -141,7 +142,7 @@ REMOVES PROC NEAR
         INC DI
         JMP NEXT_CHA
            
-    REMOVE-EXTRA-CHAR:
+    REMOVE-EXTRA-CHAR:    ;remove extra characters after removing spaces from SI
         CMP [SI],'$'
         JE ENDSTRING
         MOV [SI],'$'
