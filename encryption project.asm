@@ -13,8 +13,8 @@ org 100h
   MSG3 DB 13,10, ' - Decrypted Message  >>>  $'
   MSG4 DB 13,10, ' - To end press any key / To continue press enter >>>  $'
   MSG5 DB 13,10, '  $'
+  MSG6 DB 13,10, ' >>>>>>>>>>>>>>>>>>>>>>> WELCOME TO ENCRYPTION PROGRAM <<<<<<<<<<<<<<<<<<<<<<<<  $'
   STR1 DB 255 DUP('$') 
-  STR2 DB 255 DUP('$')
   
    ;                      'abcdefghijklmnopqrstvuwxyz'
         
@@ -25,6 +25,9 @@ org 100h
 .CODE  
 ;-------------------------------------------------------------------
                                                                    
+    LEA DX,MSG6
+    MOV AH,09H
+    INT 21H
                                                                    
                                                                    
 BEGIN:                                                             
@@ -189,7 +192,6 @@ TRANSLATE PROC NEAR
     	JMP NEXT_CHAR
     	
     END_OF_STRING:
-         ;MOV [SI],'$'
         
          
     RET            
