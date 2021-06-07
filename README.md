@@ -8,7 +8,7 @@ letter according to the following table:
 - It decrypts the same encrypted string using another table stored in data segment.
 - Removes space and shows both results as an output to the user
 # Sample Run
-![Untitled](https://user-images.githubusercontent.com/81472165/121058975-395ddb80-c7c1-11eb-9780-34d4e233fbac.png)
+![Untitled](https://user-images.githubusercontent.com/81472165/121069849-4503cf00-c7ce-11eb-80b6-5e33787a4127.png)
 
 
 
