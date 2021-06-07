@@ -105,9 +105,7 @@ DECRYPTS:;----------------------------------------------------------
     JE BEGIN ;if the user entered ENTER key,program will jumptobegin
              ;else it will end the program.                       
 ENDPROGRAM:
-                                                         
-                                                                  
-   ;MOV AH,0H                                                     
+                                                                                                                                                                            
     INT 16H                                                       
     RET                                                            
                                                                    
@@ -129,7 +127,7 @@ REMOVES PROC NEAR
         
     NEXT_CHA:
         CMP [DI],'$'
-        JE ENDSTRING  
+        JE REMOVE-EXTRA-CHAR  
         
         MOV AL,[DI]
         CMP AL,' '
@@ -143,11 +141,17 @@ REMOVES PROC NEAR
         INC DI
         JMP NEXT_CHA
            
-    ENDSTRING:
+    REMOVE-EXTRA-CHAR:
+        CMP [SI],'$'
+        JE ENDSTRING
         MOV [SI],'$'
+        INC SI
+        JMP REMOVE-EXTRA-CHAR
+        
+    ENDSTRING:    
 
   
-    RET
+        RET
 REMOVES ENDP
 
 ;-------------------------------------------------------------------     
